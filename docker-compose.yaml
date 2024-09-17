@@ -6,6 +6,8 @@ services:
     container_name: react-ui
     ports:
       - "3000:3000"
+    environment:
+      - VITE_API_URL=http://13.232.155.22:5050
     volumes:
       - ./client:/usr/src/app
     stdin_open: true
@@ -26,7 +28,7 @@ services:
     depends_on:
       - database
     environment:
-      - DATABASE_URI=mongodb://mongo-db:27017/
+      - DATABASE_URI=mongodb://mongo-db:27017/employees
     networks:
       - mern-networks
 
@@ -39,6 +41,7 @@ services:
       - mongo-data:/data/db
     networks:
       - mern-networks
+    restart: always
 
 networks:
   mern-networks:
@@ -46,3 +49,4 @@ networks:
 
 volumes:
   mongo-data:
+
